@@ -1,39 +1,13 @@
 const AdminBro = require('admin-bro');
 const AdminBroMongoose = require('@admin-bro/mongoose');
-const bcrypt = require('bcrypt')
-const {item } = require('./model/item');
-const { user } = require('./model/user');
+const itemOptions = require('./hooks/admin/item.ressource.options')
+const userOptions = require('./hooks/admin/user.ressource.options')
+
 AdminBro.registerAdapter(AdminBroMongoose)
 const options = {
-    resources: [item,{
-        resource: user,
-        options: {
-          properties: {
-            encryptedPassword: {
-              isVisible: false,
-            },
-            password: {
-              type: 'string',
-              isVisible: {
-                list: false, edit: true, filter: false, show: false,
-              },
-            },
-          },
-          actions: {
-            new: {
-              before: async (request) => {
-                if(request.payload.password) {
-                  request.payload = {
-                    ...request.payload,
-                    encryptedPassword: await bcrypt.hash(request.payload.password, 10),
-                    password: undefined,
-                  }
-                }
-                return request
-              },
-            }
-          }
-        }
-      }],
+    resources: [itemOptions,userOptions],
+    branding: {
+        companyName: 'MyTemplates-Admin',
+    }
 };
 module.exports = options;

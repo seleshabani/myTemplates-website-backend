@@ -11,7 +11,18 @@ const itemSchema = mongoose.Schema({
     },
     screenPath:{
         type:String,
-        required:true
+    },
+    screen:{
+        type:String,
+    },
+    screenFile:{
+        type:String,
+    },
+    screenPath:{
+        type:String,
+    },
+    screenBucket:{
+        type:String
     },
     createdAt:{
         type:Date,

@@ -1,2 +1,5 @@
 /node_modules
 .env
+todo.txt
+src/test.js
+/public/uploads/*

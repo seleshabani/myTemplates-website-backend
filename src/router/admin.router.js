@@ -14,10 +14,14 @@ const buildAdminRouter = (admin)=>{
             if (matched) {
               return userObj
             }
+
           }
           return false
         },
         cookiePassword: 'some-secret-password-used-to-secure-cookie'
+    },null,{
+      resave:false,
+      saveUninitialized:true,
     })
     return router;
 }
