@@ -3,6 +3,10 @@ const express = require('express');
 const AdminBroExpress = require('@admin-bro/express')
 const {user} = require('../model/user')
 const bcrypt = require('bcrypt')
+require('dotenv').config()
+// const mongoose = require('mongoose');
+// const session = require('express-session');
+// const mongoStore = require('connect-mongo');
 
 const buildAdminRouter = (admin)=>{
     // const router = AdminBroExpress.buildRouter(admin);
@@ -14,7 +18,6 @@ const buildAdminRouter = (admin)=>{
             if (matched) {
               return userObj
             }
-
           }
           return false
         },
