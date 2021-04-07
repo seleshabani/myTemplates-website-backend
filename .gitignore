@@ -3,3 +3,5 @@
 todo.txt
 src/test.js
 /public/uploads/*
+error.log
+combined.log

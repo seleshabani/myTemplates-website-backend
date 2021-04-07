@@ -22,7 +22,8 @@
     "express-formidable": "^1.2.0",
     "express-session": "^1.17.1",
     "mongoose": "^5.12.3",
-    "tslib": "^2.1.0"
+    "tslib": "^2.1.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"
