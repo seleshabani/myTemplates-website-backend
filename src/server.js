@@ -8,6 +8,7 @@ const path = require('path');
 const itemRouter = require('./router/api/item.router');
 const logger = require('./hooks/logger');
 const winston = require('winston');
+const likeRouter = require('./router/api/like.router');
 const app = express();
 const PORT = 3500;
 
@@ -35,6 +36,7 @@ const run = async ()=>{
     }
     app.use(admin.options.rootPath,router);
     app.use('/api/items',itemRouter);
+    app.use('/api/likes',likeRouter);
 
     // app.use()
     app.listen(PORT,()=>{

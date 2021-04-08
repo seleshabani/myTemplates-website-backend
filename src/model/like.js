@@ -4,7 +4,7 @@ const likeSchema = mongoose.Schema({
 
     itemId:{
         type:String,
-        required
+        required:true
     },
     userIp:{
         type:String,
