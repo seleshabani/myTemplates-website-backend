@@ -6,7 +6,7 @@ const buildAdminRouter = require('./router/admin.router');
 const mongoose = require('mongoose');
 const path = require('path');
 const itemRouter = require('./router/api/item.router');
-const logger = require('./hooks/logger');
+const {logger} = require('./hooks/logger');
 const winston = require('winston');
 const likeRouter = require('./router/api/like.router');
 const app = express();
@@ -21,24 +21,23 @@ const run = async ()=>{
     }
 
     app.use('/public',express.static(path.join(__dirname,'../public')));
-    app.use(express.json());
     const admin = new AdminBro(options);
     const router = buildAdminRouter(admin);
-    // app.use(express.urlencoded({extended:false}));
     try {
         await mongoose.connect(process.env.db,
             {useNewUrlParser:true,useUnifiedTopology: true},()=>{
-            console.log('db connected')
-        });
-    } catch (error) {
-       // console.log(error)
-        logger.log('info',error)
-    }
+                console.log('db connected')
+            });
+        } catch (error) {
+            // console.log(error)
+            logger.log('info',error)
+        }
     app.use(admin.options.rootPath,router);
+    app.use(express.json());
+    app.use(express.urlencoded({extended:true}));
     app.use('/api/items',itemRouter);
     app.use('/api/likes',likeRouter);
 
-    // app.use()
     app.listen(PORT,()=>{
         console.log(`server on http://localhost:${PORT}`)
     });

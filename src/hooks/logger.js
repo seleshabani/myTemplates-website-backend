@@ -8,4 +8,7 @@ const logger = winston.createLogger({
     new winston.transports.File({ filename: 'combined.log' }),
   ],
 });
-module.exports = logger;
+const logger_log = (route,error)=>{
+  logger.log('info',{route:route,error:error});
+}
+module.exports = {logger,logger_log};
