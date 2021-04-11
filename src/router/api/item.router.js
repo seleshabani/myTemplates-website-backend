@@ -24,10 +24,10 @@ itemRouter.get('/:id',async (req,res)=>{
     }
 })
 
-itemRouter.get('/search/:q',async (req,res)=>{
+itemRouter.get('/search/:q',paginate(item,true),async (req,res)=>{
     try {
-        const items = await item.find({name:{$regex:new RegExp(req.params.q)}});
-        res.append(process.env.cors_header,process.env.authorized_cors_url).status(200).json(items);
+      //  const items = await item.find({name:{$regex:new RegExp(req.params.q)}});
+        res.append(process.env.cors_header,process.env.authorized_cors_url).status(200).json(res.paginatedResults);
     } catch (error) {
         logger.log('info',{route:'/search',...error})
     }

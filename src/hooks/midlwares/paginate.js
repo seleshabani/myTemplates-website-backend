@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { logger_log } = require("../logger");
 
-const paginate = (model)=>{
+const paginate = (model,search=false)=>{
     return async (req,res,next)=>{
         const page = parseInt(req.query.page);
         const limit = parseInt(req.query.limit);
@@ -26,7 +26,13 @@ const paginate = (model)=>{
         }
 
         try {
-            results.results = await model.find().limit(limit).skip(startIdx).exec();
+            if (search) {
+                results.results =  await model.find({name:{$regex:new RegExp(req.params.q)}})
+                .limit(limit).skip(startIdx).exec();
+            }else{
+                results.results = await model.find().limit(limit).skip(startIdx).exec();
+            }
+
             res.paginatedResults = results;
             next();
         } catch (error) {
