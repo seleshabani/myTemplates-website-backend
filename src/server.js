@@ -10,7 +10,7 @@ const { logger } = require('./hooks/logger');
 const winston = require('winston');
 const likeRouter = require('./router/api/like.router');
 const app = express();
-const PORT = 3500;
+const PORT = process.env.PORT || 3500;
 
 const run = async () => {
 
