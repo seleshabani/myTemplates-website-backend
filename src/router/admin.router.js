@@ -9,23 +9,23 @@ require('dotenv').config()
 // const mongoStore = require('connect-mongo');
 
 const buildAdminRouter = (admin)=>{
-    const router = AdminBroExpress.buildRouter(admin);
-    // const router = AdminBroExpress.buildAuthenticatedRouter(admin, {
-    //     authenticate: async (email, password) => {
-    //       const userObj = await user.findOne({ email })
-    //       if (userObj) {
-    //         const matched = await bcrypt.compare(password, userObj.encryptedPassword)
-    //         if (matched) {
-    //           return userObj
-    //         }
-    //       }
-    //       return false
-    //     },
-    //     cookiePassword: 'some-secret-password-used-to-secure-cookie'
-    // },null,{
-    //   resave:false,
-    //   saveUninitialized:true,
-    // })
+   // const router = AdminBroExpress.buildRouter(admin);
+    const router = AdminBroExpress.buildAuthenticatedRouter(admin, {
+        authenticate: async (email, password) => {
+          const userObj = await user.findOne({ email })
+          if (userObj) {
+            const matched = await bcrypt.compare(password, userObj.encryptedPassword)
+            if (matched) {
+              return userObj
+            }
+          }
+          return false
+        },
+        cookiePassword: 'some-secret-password-used-to-secure-cookie'
+    },null,{
+      resave:false,
+      saveUninitialized:true,
+    })
     return router;
 }
 
