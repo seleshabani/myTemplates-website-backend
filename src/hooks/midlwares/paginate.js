@@ -8,9 +8,10 @@ const paginate = (model,search=false)=>{
 
         const startIdx = (page - 1) * limit;
         const endIdx = page * limit;
-
+        const nbrPages = Math.ceil(await model.countDocuments().exec() / limit);
         const results = {};
-
+        results.nbrPages = nbrPages;
+        
         if (endIdx < await model.countDocuments().exec()) {
             results.next = {
                 page : page +1,

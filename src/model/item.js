@@ -24,6 +24,10 @@ const itemSchema = mongoose.Schema({
     screenBucket:{
         type:String
     },
+    categorie:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'categorie'
+    },
     createdAt:{
         type:Date,
         default:Date.now()
